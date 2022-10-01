@@ -4,26 +4,71 @@ output: html_document
 date: "2022-10-01"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# LOAD DATA 
+
+```{r}
+library(datasets)
 ```
 
-## R Markdown
+# SUMMARIZE DATA
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+head(iris)
+summary(iris)
+plot(iris)
 ```
 
-## Including Plots
+# CLEAN UP
+# Clear packages
+```{r}
+detach("package:datasets", unload = TRUE)
+```
+# Clear plots
+```{r}
+dev.off()
+```
+# Clear console
+Ctrl+L
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+# LOAD PACKAGES
+# Install packages
+```{r}
+install.packages("pacman")
+library(pacman)
+```
+# These are the packages I load every time.
+```{r}
+pacman::p_load(pacman, dplyr, GGally, ggplot2, ggthemes, ggvis, httr, lubridate, plotly, rio, rmarkdown, shiny, stringr, tidyr)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# LOAD BASE PACKAGES
+```{r}
+library(datasets)
+```
+
+# LETS LOOK AT THE iris DATASET
+```{r}
+head(iris)
+```
+
+# CREATE PLOTS
+# Categorical variable
+```{r}
+plot(iris$Species)
+```
+# Quantitative variable
+```{r}
+plot(iris$Petal.Length)
+```
+# Cat + Quant
+```{r}
+plot(iris$Species, iris$Petal.Width)
+```
+# Quant pair
+```{r}
+plot(iris$Petal.Length, iris$Petal.Width)
+```
+# Enttire data frame
+```{r}
+plot(iris)
+```
