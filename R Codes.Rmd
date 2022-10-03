@@ -1,6 +1,7 @@
 ---
 title: "My Sample R Codes"
 output: html_document
+Author: Sedi Abbasnasab
 date: "2022-10-01"
 ---
 
@@ -20,55 +21,235 @@ plot(iris)
 
 # CLEAN UP
 # Clear packages
+
 ```{r}
 detach("package:datasets", unload = TRUE)
 ```
+
 # Clear plots
+
 ```{r}
 dev.off()
 ```
+
 # Clear console
+
 Ctrl+L
 
 # LOAD PACKAGES
 # Install packages
+
 ```{r}
 install.packages("pacman")
 library(pacman)
 ```
+
 # These are the packages I load every time.
+
 ```{r}
 pacman::p_load(pacman, dplyr, GGally, ggplot2, ggthemes, ggvis, httr, lubridate, plotly, rio, rmarkdown, shiny, stringr, tidyr)
 ```
 
 # LOAD BASE PACKAGES
+
 ```{r}
 library(datasets)
 ```
 
 # LETS LOOK AT THE iris DATASET
+
 ```{r}
 head(iris)
 ```
 
 # CREATE PLOTS
 # Categorical variable
+
 ```{r}
 plot(iris$Species)
 ```
+
 # Quantitative variable
+
 ```{r}
 plot(iris$Petal.Length)
 ```
+
 # Cat + Quant
+
 ```{r}
 plot(iris$Species, iris$Petal.Width)
 ```
+
 # Quant pair
+
 ```{r}
 plot(iris$Petal.Length, iris$Petal.Width)
 ```
+
 # Enttire data frame
+
 ```{r}
 plot(iris)
+```
+
+# Plot with options
+
+```{r}
+plot(iris$Petal.Length, iris$Petal.Width,
+     col = "#cc0000", pch = 19, 
+     main = "Iris: Petal Lenght vs. Petal Width",
+     xlab = "Petal Lenght",
+     ylab = "Petal Width")
+```
+
+# Plot formulas with plot()
+
+```{r}
+plot(cos, 0, 2*pi)
+plot(exp, 1, 5)
+plot(dnorm, -3, +3)
+```
+
+# Formula plot with options
+
+```{r}
+plot(dnorm, -3, +3,
+     col = "#cc0000",
+     Iwd = 5,
+     main = "Standard Normal Distribution",
+     xlab = "z-scores",
+     ylab = "Density")
+```
+
+# Let's look at mtcars dataset
+
+```{r}
+library(datasets)
+?mtcars
+head(mtcars)
+```
+
+# Bar charts
+
+```{r}
+cylinders <- table(mtcars$cyl) #Create table
+barplot(cylinders) # Bar chart
+plot(cylinders) # Default X-Y plot (lines)
+```
+
+# Get back to iris dataset
+
+```{r}
+library(datasets)
+?iris
+head(iris)
+```
+
+# Basic histograms
+
+```{r}
+hist(iris$Sepal.Length)
+hist(iris$Sepal.Width)
+hist(iris$Petal.Length)
+hist(iris$Petal.Width)
+```
+
+# Histogram for each species using options
+
+```{r}
+hist(iris$Petal.Width [iris$Species == "setosa"],
+     xlim = c(0, 3),
+     breaks = 9,
+     main = "Petal Width for Setosa",
+     xlab = "",
+     col = "red")
+
+hist(iris$Petal.Width [iris$Species == "versicolor"],
+     xlim = c(0, 3),
+     breaks = 9,
+     main = "Petal Width for Versicolor",
+     xlab = "",
+     col = "purple")
+
+hist(iris$Petal.Width [iris$Species == "virginica"],
+     xlim = c(0, 3),
+     breaks = 9,
+     main = "Petal Width for Virginica",
+     xlab = "",
+     col = "blue")
+```
+
+# Restore graphic parameter
+
+```{r}
+par(mfrow=c(1, 1))
+```
+
+# Scatterplot using mtcars dataset
+
+```{r}
+library(datasets)
+?mtcars
+head(mtcars)
+```
+
+# Good to first check univariate distributions
+
+``` {r}
+hist(mtcars$wt)
+hist(mtcars$mpg)
+```
+
+# Basic X-Y plot for two quantitative variables
+
+```{r}
+plot(mtcars$wt, mtcars$mpg)
+```
+
+# I have now added some options to the above plot
+
+```{r}
+plot(mtcars$wt, mtcars$mpg,
+     pch = 19,
+     cex = 1.5,
+     col = "#cc0000",
+     main = "MPG as a Function of Weight of Cars",
+     xlab = "Weight (in 1000 pounds)",
+     ylab = "MPG")
+```
+
+# OVERLAYING PLOTS
+# I am going to use lynx dataset for demonstrating overlaying plots
+
+```{r}
+library(datasets)
+?lynx
+head(lynx)
+```
+
+# Histogram 
+# Default
+
+```{r}
+hist(lynx)
+```
+
+# I am going to add some options to the above histogram and then add a normal distribution, add two kernel density estimators, finally add a rug plot
+
+```{r}
+hist(lynx,
+     breaks = 14,
+     freq = FALSE,
+     col = "thistle1",
+     main = paste("Histogram of Annual Canadian Lynx",
+                  "Trappings, 1821-1934"),
+     xlab = "Number of Lynx Trapped")
+curve(dnorm(x, mean = mean(lynx), sd = sd(lynx)),
+      col = "thistle4",
+      lwd = 2,
+      add = TRUE)
+lines(density(lynx), col = "blue", lwd = 2)
+lines(density(lynx, adjust = 3), col = "purple", lwd = 2)
+rug(lynx, lwd = 2, col = "gray")
 ```
