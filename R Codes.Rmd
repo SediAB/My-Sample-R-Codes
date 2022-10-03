@@ -253,3 +253,65 @@ lines(density(lynx), col = "blue", lwd = 2)
 lines(density(lynx, adjust = 3), col = "purple", lwd = 2)
 rug(lynx, lwd = 2, col = "gray")
 ```
+
+# summary
+
+```{r}
+library(datasets)
+head(iris)
+summary(iris$Species) # categorical variable
+summary(iris$Sepal.Length) # quantitative variable
+summary(iris) # Entire data frame
+```
+
+# describe
+# Download the psych package first
+
+```{r}
+p_load(psych)
+```
+```{r}
+describe(iris$Sepal.Length) # one quantitative variable
+describe(iris) # entire data frame
+```
+
+# Selecting cases
+
+```{r}
+hist(iris$Petal.Length)
+summary(iris$Petal.Length)
+summary(iris$Species)
+```
+
+# Select by category
+
+# Versicolor
+
+```{r}
+hist(iris$Petal.Length[iris$Species == "versicolor"],
+     main = "Petal Lenght: Versicolor")
+```
+
+# Virginica
+
+```{r}
+hist(iris$Petal.Length [iris$Species == "virginica"],
+     main = "Petal Lenght: Virginica")
+```
+
+# Setosa
+
+```{r}
+hist(iris$Petal.Length [iris$Species == "setosa"],
+     main = "Petal Lenght: Setosa")
+```
+
+# Select by value
+
+# Short petals only (all Setosa)
+
+```{r}
+hist(iris$Petal.Length [iris$Petal.Length < 2],
+     main = "Petal Lenght < 2")
+```
+
